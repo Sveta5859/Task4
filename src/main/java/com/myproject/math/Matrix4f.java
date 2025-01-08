@@ -5,7 +5,7 @@ public class Matrix4f {
 
     public Matrix4f() {
         m=new float[4][4];
-        setIdentity();
+        setIdentity();  //инициализация матрица как единичная
     }
 
     public void setIdentity(){
@@ -32,16 +32,16 @@ public class Matrix4f {
         for(int i=0;i<4;i++){
             for(int j=0;j<4;j++){
                 float sum=0;
-                for(int k=0;k<4;k++){
+                for(int k=0;k<4;k++){  //вычисления суммы произведений элементов
                     sum+=A[i][k]*B[k][j];
                 }
-                R[i][j]=sum;
+                R[i][j]=sum;  //элемент результирующей матрицы
             }
         }
         return res;
     }
 
-    @Override
+    @Override  //строковое представление матрицы для удобного вывода
     public String toString(){
         StringBuilder sb=new StringBuilder("Matrix4f:\n");
         for(int i=0;i<4;i++){

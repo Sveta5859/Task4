@@ -9,10 +9,10 @@ public class Camera {
     private Vector3f target;
     private Vector3f up;
 
-    private float fov;
-    private float aspect;
-    private float znear;
-    private float zfar;
+    private float fov;      //Угол обзора по вертикали в градусах
+    private float aspect;  //Соотношение сторон (ширина к высоте) видового экрана
+    private float znear;  //Ближняя плоскость отсечения
+    private float zfar;  //Дальняя плоскость отсечения
 
     public Camera(Vector3f position, Vector3f target, Vector3f up, float fov, float aspect, float znear, float zfar) {
         this.position = position;
@@ -24,15 +24,18 @@ public class Camera {
         this.zfar = zfar;
     }
 
-    public void setPosition(Vector3f position) {
+    public void setPosition(Vector3f position) {  //для установки позиции камеры
+
         this.position = position;
     }
 
-    public void setTarget(Vector3f target) {
+    public void setTarget(Vector3f target) { //для установки точки, на которую направлена камера
+
         this.target = target;
     }
 
-    public Matrix4f getViewMatrix() {
+    public Matrix4f getViewMatrix() {  //возвращает видовую матрицу
+
         return GraphicConveyor.lookAt(position, target, up);
     }
 

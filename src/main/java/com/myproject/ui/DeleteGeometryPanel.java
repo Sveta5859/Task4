@@ -11,7 +11,7 @@ import javafx.scene.layout.VBox;
 public class DeleteGeometryPanel {
 
     private final SceneManager sceneManager;
-    private final GuiController guiController;
+    private final GuiController guiController;//перерисовка сцены
     private final VBox root;
     private final TextField vertexIndexField;
     private final TextField polygonIndexField;

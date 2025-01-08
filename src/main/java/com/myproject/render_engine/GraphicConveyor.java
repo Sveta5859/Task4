@@ -6,11 +6,11 @@ import com.myproject.math.MathUtils;
 
 public class GraphicConveyor {
     public static Matrix4f lookAt(Vector3f position, Vector3f target, Vector3f up) {
-        Vector3f f = new Vector3f(target.getX()-position.getX(), target.getY()-position.getY(), target.getZ()-position.getZ());
+        Vector3f f = new Vector3f(target.getX()-position.getX(), target.getY()-position.getY(), target.getZ()-position.getZ());//Вычисляет вектор «вперёд»
         MathUtils.normalize(f);
-        Vector3f s = MathUtils.cross(f, up);
+        Vector3f s = MathUtils.cross(f, up);//Вычисляет вектор «вправо»
         MathUtils.normalize(s);
-        Vector3f u = MathUtils.cross(s,f);
+        Vector3f u = MathUtils.cross(s,f);//Вычисляет вектор «вверх»
 
         Matrix4f mat = new Matrix4f();
         float[][] M = mat.getData();
@@ -22,7 +22,7 @@ public class GraphicConveyor {
     }
 
     public static Matrix4f perspective(float fovRad, float aspect, float znear, float zfar) {
-        float f = 1.0f/(float)Math.tan(fovRad/2.0);
+        float f = 1.0f/(float)Math.tan(fovRad/2.0);//Вычисляет коэффициент f на основе угла обзора
         Matrix4f mat = new Matrix4f();
         float[][] M = mat.getData();
         M[0][0]=f/aspect;M[0][1]=0;M[0][2]=0;                             M[0][3]=0;

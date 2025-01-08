@@ -17,7 +17,7 @@ import java.util.List;
 public class RenderEngine {
     private Camera camera;
     private Rasterizer rasterizer;
-    private boolean wireframe = false;
+    private boolean wireframe = false;//Флаг для режима отображения проволочного каркаса
 
     public RenderEngine(Camera camera,int width,int height) {
         this.camera = camera;
@@ -25,14 +25,15 @@ public class RenderEngine {
     }
 
     public void setWireframe(boolean wf) {
+
         this.wireframe=wf;
     }
 
-    public void render(Canvas canvas, List<SceneModel> models) {
+    public void render(Canvas canvas, List<SceneModel> models) {//отрисовка сцены
         if (canvas==null) return;
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        gc.setFill(Color.BLACK);
+        gc.setFill(Color.BLACK); //изначальный фон экрана
         gc.fillRect(0,0,canvas.getWidth(),canvas.getHeight());
 
         PixelWriter pw = gc.getPixelWriter();
@@ -44,10 +45,11 @@ public class RenderEngine {
         int w=(int)canvas.getWidth();
         int h=(int)canvas.getHeight();
 
-        for (SceneModel sm: models) {
+        for (SceneModel sm: models) { //обход всей модели
             if(!sm.isActive()) continue;
             Model m = sm.getModel();
-            if (m.getVertices().isEmpty()||m.getPolygons().isEmpty()) continue;
+            if (m.getVertices().isEmpty()||m.getPolygons().isEmpty())
+                continue;
 
             Matrix4f modelMat = sm.getTransformMatrix();
             Matrix4f mvp = Matrix4f.multiply(proj,Matrix4f.multiply(view,modelMat));
@@ -59,21 +61,22 @@ public class RenderEngine {
                 float[] res = MathUtils.multiplyMatrixByVector(mvp,v.getX(),v.getY(),v.getZ());
                 transformedVerts[i][0]=res[0]/res[3];
                 transformedVerts[i][1]=res[1]/res[3];
-                transformedVerts[i][2]=res[2]/res[3];
+                transformedVerts[i][2]=res[2]/res[3];//Делает перспективное деление, сохраняя однородную координату
                 transformedVerts[i][3]=res[3];
-                transformedVerts[i][0]=(transformedVerts[i][0]*0.5f+0.5f)*w;
+                transformedVerts[i][0]=(transformedVerts[i][0]*0.5f+0.5f)*w;//Преобразует координаты вершин в координаты окна просмотра
                 transformedVerts[i][1]=(1-(transformedVerts[i][1]*0.5f+0.5f))*h;
             }
 
-            Color diffuse = m.getMaterial().getDiffuse();
-            Color ambient = m.getMaterial().getAmbient();
+            Color diffuse = m.getMaterial().getDiffuse();//Получает цвета диффузного и окружающего
+            Color ambient = m.getMaterial().getAmbient();//освещения из материала и выполняет интерполяцию между ними.
             Color c = diffuse.interpolate(ambient,0.3);
             Image tex = m.getMaterial().getTexture();
             boolean hasTex = m.getMaterial().hasTexture();
 
             for (Polygon p: m.getPolygons()) {
                 List<Integer> idx = p.getVertexIndices();
-                if (!p.isValid()) continue;
+                if (!p.isValid()) //пропуск полигона,если он не треугольник
+                    continue;
 
                 int i1=idx.get(0);
                 int i2=idx.get(1);
@@ -88,7 +91,7 @@ public class RenderEngine {
                         {x2,y2,z2},
                         {x3,y3,z3}
                 };
-
+               //Проверяет, включен ли режим отображения проволочного каркаса
                 if (wireframe) {
                     rasterizer.drawLine(pw,(int)x1,(int)y1,(int)x2,(int)y2,Color.WHITE,(z1+z2)*0.5);
                     rasterizer.drawLine(pw,(int)x2,(int)y2,(int)x3,(int)y3,Color.WHITE,(z2+z3)*0.5);

@@ -6,7 +6,7 @@ import javafx.collections.ObservableList;
 import java.util.List;
 
 public class Model {
-    private ObservableList<Vertex> vertices;
+    private ObservableList<Vertex> vertices;  //для отслеживания изменений
     private ObservableList<Polygon> polygons;
     private Material material;
 
@@ -20,7 +20,7 @@ public class Model {
         polygons = FXCollections.observableArrayList();
         material = new Material();
     }
-
+  //  чтобы пользовательский интерфейс мог отслеживать изменения нужны геттеры
     public ObservableList<Vertex> getVertices() {
         return vertices;
     }
@@ -31,7 +31,7 @@ public class Model {
 
     public void addVertex(Vertex v) {
         vertices.add(v);
-    }
+    }  //Методы для добавления вершин и полигонов
 
     public void addPolygon(Polygon p) {
         polygons.add(p);
@@ -39,7 +39,7 @@ public class Model {
 
     public Material getMaterial() {
         return material;
-    }
+    }  //Методы для получения и установки материала модели
 
     public void setMaterial(Material m) {
         this.material=m;
@@ -77,3 +77,4 @@ public class Model {
         return normFaces;
     }
 }
+//установка и получение списков

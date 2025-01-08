@@ -19,7 +19,9 @@ public class ObjReader {
         int t;
         int n;
         FaceVert(int v,int t,int n){
-            this.v=v;this.t=t;this.n=n;
+            this.v=v;
+            this.t=t;
+            this.n=n;
         }
     }
 
@@ -48,30 +50,35 @@ public class ObjReader {
             String line;
             while((line=br.readLine())!=null) {
                 line=line.trim();
-                if(line.isEmpty()||line.startsWith("#")) continue;
+                if(line.isEmpty()||line.startsWith("#"))
+                    continue;
                 if(line.startsWith("v ")) {
                     String[] parts=line.split("\\s+");
-                    if(parts.length<4) continue;
+                    if(parts.length<4)
+                        continue;
                     float x=Float.parseFloat(parts[1]);
                     float y=Float.parseFloat(parts[2]);
                     float z=Float.parseFloat(parts[3]);
                     verts.add(new float[]{x,y,z});
                 } else if(line.startsWith("vt ")) {
                     String[] parts=line.split("\\s+");
-                    if(parts.length<3) continue;
+                    if(parts.length<3)
+                        continue;
                     float u=Float.parseFloat(parts[1]);
                     float v=Float.parseFloat(parts[2]);
                     texcoords.add(new float[]{u,v});
                 } else if(line.startsWith("vn ")) {
                     String[] parts=line.split("\\s+");
-                    if(parts.length<4) continue;
+                    if(parts.length<4)
+                        continue;
                     float nx=Float.parseFloat(parts[1]);
                     float ny=Float.parseFloat(parts[2]);
                     float nz=Float.parseFloat(parts[3]);
                     norms.add(new float[]{nx,ny,nz});
                 } else if (line.startsWith("f ")) {
                     String[] parts=line.split("\\s+");
-                    if(parts.length<4) continue;
+                    if(parts.length<4)
+                        continue;
                     List<FaceVert> fvs = new ArrayList<>();
                     for(int i=1;i<parts.length;i++){
                         String[] sub=parts[i].split("/");

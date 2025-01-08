@@ -6,7 +6,7 @@ import javafx.scene.paint.Color;
 public class Rasterizer {
     private int width;
     private int height;
-    private double[][] zBuffer;
+    private double[][] zBuffer;//Z-буфер для реализации z-тестирования (алгоритма скрытия поверхностей)
 
     public Rasterizer(int width,int height) {
         this.width=width;
@@ -18,21 +18,22 @@ public class Rasterizer {
     public void clearZBuffer() {
         for (int x=0;x<width;x++) {
             for (int y=0;y<height;y++) {
-                zBuffer[x][y] = Double.POSITIVE_INFINITY;
+                zBuffer[x][y] = Double.POSITIVE_INFINITY;//Это гарантирует, что в начале рендеринга любой пиксель считается «за»
             }
         }
     }
 
     public void drawLine(PixelWriter pw,int x0,int y0,int x1,int y1, Color color,double z) {
-        int dx = Math.abs(x1-x0);
+        int dx = Math.abs(x1-x0);  //алгоритм Брезенхэма
         int dy = Math.abs(y1-y0);
-        int sx = x0<x1?1:-1;
+        int sx = x0<x1?1:-1;//направления приращения
         int sy = y0<y1?1:-1;
-        int err = dx-dy;
+        int err = dx-dy;//начальное значение ошибки
         int x=x0;int y=y0;
         while(true) {
-            putPixel(pw,x,y,z,color);
-            if(x==x1 && y==y1) break;
+            putPixel(pw,x,y,z,color); //метод putPixel и z-буфер
+            if(x==x1 && y==y1)
+                break;
             int e2 = 2*err;
             if(e2>-dy){err-=dy;x+=sx;}
             if(e2<dx){err+=dx;y+=sy;}
@@ -82,7 +83,7 @@ public class Rasterizer {
 
         for(int scanlineY=(int)y1;scanlineY<=(int)y2;scanlineY++) {
             drawScanLine(pw,scanlineY,curX1,curZ1,curX2,curZ2,color);
-            curX1+=invSlope1;
+            curX1+=invSlope1; //обновляет текущие значения x-координат на основе инверсных наклонов
             curX2+=invSlope2;
             curZ1+=invSlopeZ1;
             curZ2+=invSlopeZ2;

@@ -9,8 +9,8 @@ public class SceneModel {
     private Model model;
     private boolean active;
     private Vector3f position;
-    private Vector3f rotation;
-    private Vector3f scale;
+    private Vector3f rotation;//Угол поворота модели по осям X, Y и Z
+    private Vector3f scale;//Масштаб модели по осям X, Y и Z
     private Matrix4f transformMatrix;
     private String name;
 
@@ -24,22 +24,30 @@ public class SceneModel {
     }
 
     public Model getModel() { return model; }
-    public boolean isActive() { return active; }
+    public boolean isActive() {
+        return active;
+    }
     public void setActive(boolean active) { this.active = active; }
 
-    public Vector3f getPosition() { return position; }
+    public Vector3f getPosition() {
+        return position;
+    }
     public void setPosition(float x,float y,float z) {
         position.setX(x); position.setY(y); position.setZ(z);
         recalcTransformMatrix();
     }
 
-    public Vector3f getRotation() { return rotation; }
+    public Vector3f getRotation() {
+        return rotation;
+    }
     public void setRotation(float rx,float ry,float rz) {
         rotation.setX(rx); rotation.setY(ry); rotation.setZ(rz);
         recalcTransformMatrix();
     }
 
-    public Vector3f getScale() { return scale; }
+    public Vector3f getScale() {
+        return scale;
+    }
     public void setScale(float sx,float sy,float sz) {
         scale.setX(sx); scale.setY(sy); scale.setZ(sz);
         recalcTransformMatrix();
@@ -57,7 +65,9 @@ public class SceneModel {
         this.transformMatrix = M;
     }
 
-    public Matrix4f getTransformMatrix() { return transformMatrix; }
+    public Matrix4f getTransformMatrix() {
+        return transformMatrix;
+    }
 
     public void setName(String name) {
         this.name=name;
@@ -65,7 +75,8 @@ public class SceneModel {
 
     @Override
     public String toString() {
-        if(name!=null && !name.isEmpty()) return name;
+        if(name!=null && !name.isEmpty())
+            return name;
         return "SceneModel";
     }
 }

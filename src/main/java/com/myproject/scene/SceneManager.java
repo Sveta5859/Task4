@@ -7,7 +7,8 @@ public class SceneManager {
     private ObservableList<SceneModel> models;
 
     public SceneManager() {
-        models = FXCollections.observableArrayList();
+
+        models = FXCollections.observableArrayList();//Инициализирует список моделей как ObservableList
     }
 
     public void addModel(SceneModel model) {

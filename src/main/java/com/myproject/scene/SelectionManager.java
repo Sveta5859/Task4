@@ -1,4 +1,4 @@
-package com.myproject.scene;
+/*package com.myproject.scene;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,4 +27,4 @@ public class SelectionManager {
     public List<SceneModel> getSelectedModels() {
         return selectedModels;
     }
-}
+}*/

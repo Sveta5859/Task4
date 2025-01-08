@@ -3,20 +3,21 @@ package com.myproject.math;
 public class MathUtils {
     public static void normalize(Vector3f v){
         float len=v.length();
-        if(len>1e-9){
+        if(len>1e-9){       //длина вектора не слишком близка к нулю, чтобы избежать деления на ноль
             v.setX(v.getX()/len);
-            v.setY(v.getY()/len);
+            v.setY(v.getY()/len);   //нормализация вектороа
             v.setZ(v.getZ()/len);
         }
     }
 
     public static float dot(Vector3f a,Vector3f b){
+
         return a.getX()*b.getX()+a.getY()*b.getY()+a.getZ()*b.getZ();
-    }
+    }//скалярное произведение
 
     public static Vector3f cross(Vector3f a,Vector3f b){
         float cx=a.getY()*b.getZ()-a.getZ()*b.getY();
-        float cy=a.getZ()*b.getX()-a.getX()*b.getZ();
+        float cy=a.getZ()*b.getX()-a.getX()*b.getZ();  //вычисление компонентов вект. произв.
         float cz=a.getX()*b.getY()-a.getY()*b.getX();
         return new Vector3f(cx,cy,cz);
     }
@@ -24,13 +25,15 @@ public class MathUtils {
     public static Matrix4f createTranslation(float tx,float ty,float tz){
         Matrix4f mat=new Matrix4f();
         float[][] d=mat.getData();
-        d[0][3]=tx;d[1][3]=ty;d[2][3]=tz;
+        d[0][3]=tx;
+        d[1][3]=ty;
+        d[2][3]=tz;
         return mat;
     }
 
     public static Matrix4f createRotationX(float angleDeg) {
-        Matrix4f mat=new Matrix4f();
-        float a=(float)Math.toRadians(angleDeg);
+        Matrix4f mat=new Matrix4f();  //поворот вокруг оси
+        float a=(float)Math.toRadians(angleDeg); //градусы-радианы)
         float c=(float)Math.cos(a);
         float s=(float)Math.sin(a);
         float[][] d=mat.getData();
@@ -62,14 +65,14 @@ public class MathUtils {
     }
 
     public static Matrix4f createScaling(float sx,float sy,float sz) {
-        Matrix4f mat=new Matrix4f();
+        Matrix4f mat=new Matrix4f();  //матрица масштабирования
         float[][] d=mat.getData();
         d[0][0]=sx;d[1][1]=sy;d[2][2]=sz;
         return mat;
     }
 
     public static float[] multiplyMatrixByVector(Matrix4f mat,float x,float y,float z) {
-        float[][] M=mat.getData();
+        float[][] M=mat.getData();    // умножает матрицу 4x4 на вектор (x, y, z)
         float X=M[0][0]*x+M[0][1]*y+M[0][2]*z+M[0][3]*1;
         float Y=M[1][0]*x+M[1][1]*y+M[1][2]*z+M[1][3]*1;
         float Z=M[2][0]*x+M[2][1]*y+M[2][2]*z+M[2][3]*1;
@@ -79,7 +82,7 @@ public class MathUtils {
 
     public static Vector3f multiplyMatrixByVector3f(Matrix4f mat,float x,float y,float z) {
         float[] res=multiplyMatrixByVector(mat,x,y,z);
-        float w=res[3]!=0?res[3]:1;
+        float w=res[3]!=0?res[3]:1;  //Получает однородную координату w. Если она равна 0, то используется значение 1
         return new Vector3f(res[0]/w,res[1]/w,res[2]/w);
-    }
+    }  //перспективное деление и создание нового вектора
 }

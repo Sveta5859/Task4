@@ -1,13 +1,10 @@
-package com.myproject.scene;
+/*package com.myproject.scene;
 
 import com.myproject.math.Matrix4f;
 import com.myproject.math.Vector3f;
 import com.myproject.math.MathUtils;
 
-/**
- * Абстрактный базовый класс для объектов в сцене.
- * Содержит позицию, вращение, масштаб и логику получения итоговой матрицы трансформации.
- */
+
 public abstract class SceneObject {
     protected Vector3f position;
     protected Vector3f rotation;
@@ -92,4 +89,4 @@ public abstract class SceneObject {
         this.rotation.setX(0); this.rotation.setY(0); this.rotation.setZ(0);
         this.scale.setX(1);    this.scale.setY(1);    this.scale.setZ(1);
     }
-}
+}*/

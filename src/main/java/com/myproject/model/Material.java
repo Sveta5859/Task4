@@ -4,14 +4,14 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 public class Material {
-    private Color ambient = Color.color(1,1,1);
-    private Color diffuse = Color.color(0.8,0.8,0.8);
-    private Color specular = Color.color(0.5,0.5,0.5);
-    private Color emissive = Color.color(0,0,0);
-    private float shininess = 96.078431f;
-    private float indexOfRefraction = 1.0f;
-    private float opacity = 1.0f;
-    private int illum = 2;
+    private Color ambient = Color.color(1,1,1);  //фоновое освещение
+    private Color diffuse = Color.color(0.8,0.8,0.8);  //рассеянное
+    private Color specular = Color.color(0.5,0.5,0.5);  //заркальное
+    private Color emissive = Color.color(0,0,0);  //испускающее
+    private float shininess = 96.078431f;  //показатель блеска
+    private float indexOfRefraction = 1.0f;  //... преломления
+    private float opacity = 1.0f;  //прозрачность
+    private int illum = 2;  //модель освещения
 
     private Image texture = null;
     private boolean hasTexture = false;
