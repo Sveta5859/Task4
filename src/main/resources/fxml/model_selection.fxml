@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.VBox?>
+<?import com.myproject.scene.SceneModel?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.myproject.ui.ModelSelectionPanelController" spacing="10" fx:id="root" style="-fx-padding:10;">
+    <Label text="Models:"/>
+    <ListView fx:id="listView" prefHeight="200.0" />
+    <Button text="Activate" onAction="#onActivate"/>
+    <Button text="Deactivate" onAction="#onDeactivate"/>
+</VBox>

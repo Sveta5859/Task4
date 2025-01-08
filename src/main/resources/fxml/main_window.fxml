@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.myproject.ui.GuiController" fx:id="rootPane">
+    <top>
+        <MenuBar fx:id="menuBar">
+            <!-- Меню создаётся программно -->
+        </MenuBar>
+    </top>
+    <center>
+        <Canvas fx:id="canvas" width="800" height="600"/>
+    </center>
+    <right>
+        <!-- Модель selection panel добавляется программно -->
+    </right>
+    <bottom>
+        <!-- Трансформация добавляется программно -->
+    </bottom>
+</BorderPane>
